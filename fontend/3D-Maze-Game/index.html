@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Maze 3D</title>
+        <meta name="description" content="Maze 3D for WebGL with Three.js" />
+        <meta name="author" content="Yannick Comte" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" media="screen" href="assets/css/style.css" />
+    </head>
+    <body>
+        <img style="display:none" src="assets/images/preview-laby.png" alt="sharing image" />
+
+        <!-- User information Area -->
+        <div class="user-info" id="userinfo" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 300px; margin: 50px auto; display: flex; flex-direction: column; gap: 10px;">
+            <input type="text" id="username" placeholder="Enter your username" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
+            <select id="team" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <option value="none">--Select--</option>
+                <option value="website">Website</option>
+                <option value="report">BoldReports</option>
+                <option value="desk">BoldDesk</option>
+                <option value="sign">BoldSign</option>
+            </select>
+            <button id="start" style="padding: 10px; border: none; border-radius: 5px; background-color: #00ff08; color: white; cursor: pointer;">Start</button>
+        </div>
+
+        <!-- Game Area -->
+        <div id="canvasContainer" style="display: none;">
+            <div id="joypad">
+                <div class="top">
+                    <span class="joykey" id="keyup"><img src="assets/images/pad/kbup.png" /></span>
+                </div>
+                <div class="bottom">
+                    <span class="joykey" id="keyleft"><img src="assets/images/pad/kbleft.png" /></span>
+                    <span class="joykey" id="keydown"><img src="assets/images/pad/kbdown.png" /></span>
+                    <span class="joykey" id="keyright"><img src="assets/images/pad/kbright.png" /></span>
+                </div>
+            </div>
+        </div>
+        <audio id="bumpSound">
+            <source src="assets/sound/bat.mp3" />
+            <source src="assets/sound/bat.ogg" />
+        </audio>
+        <script src="assets/js/three.min.js"></script>
+        <script src="assets/js/Demonixis.Input.js"></script>
+        <script src="assets/js/Demonixis.Minimap.js"></script>
+        <script src="assets/js/Demonixis.GameHelper.js"></script>
+        <script src="assets/js/maze3d.js"></script>
+        <script src="assets/js/inputHandler.js"></script>
+    </body>
+</html>
