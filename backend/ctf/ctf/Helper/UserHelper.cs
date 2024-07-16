@@ -14,7 +14,7 @@ public class UserHelper
 
     private UserModel RemoveFlagFromObject(UserModel userData)
     {
-        var data = userData.challenge.challengeStatus.FindAll(data => !string.IsNullOrEmpty(data.flag) == true);
+        var data = userData?.challenge.challengeStatus.FindAll(data => !string.IsNullOrEmpty(data.flag) == true);
         foreach (CTFStatus info in data)
         {
             info.flag = string.Empty;
@@ -23,11 +23,11 @@ public class UserHelper
         return userData;
     }
     
-    public UserModel GetUserStatusById(Guid guid, bool isRemoveFlag = true)
+    public UserModel GetUserById(Guid guid, bool isRemoveFlag = true)
     {
         var userDetails = this.GetAllUser();
         var currentUserInfo = userDetails?.Find(data => data.userId == guid);
-        if (isRemoveFlag)
+        if (isRemoveFlag && currentUserInfo != null)
         {
             return this.RemoveFlagFromObject(currentUserInfo);
         }
@@ -79,14 +79,14 @@ public class UserHelper
             {
                 level =  level,
                 isCompleted = false,
-                flag = this.GetFlagBasedOnLevel(level, team)
+                flag = this.GenerateAndGetFlagBasedOnLevel(level, team)
             });
         }
 
         return initialStatusList;
     }
 
-    private string GetFlagBasedOnLevel(UserLevel level, string team)
+    public string GenerateAndGetFlagBasedOnLevel(UserLevel level, string team)
     {
         string currentTeamFlag = string.Empty;
         FlagOrder levelFlag = new FlagOrder();

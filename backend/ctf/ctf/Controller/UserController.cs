@@ -13,7 +13,7 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     public UserModel GetUserStatus(string userid)
     {
         var userId = Guid.Parse(userid);
-        var userInfo = new UserHelper().GetUserStatusById(userId);
+        var userInfo = new UserHelper().GetUserById(userId);
         return userInfo;
     }
 

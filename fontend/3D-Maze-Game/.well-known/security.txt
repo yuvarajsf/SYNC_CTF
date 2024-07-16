@@ -1,0 +1,17 @@
+Let's learn what is Security.txt file:
+---------------------------------------
+
+A security.txt file is a standardized text file that contains contact
+information for a website's security team.
+It's placed in a website's root directory and is intended to be readable by both humans and machines.
+Security researchers can use the file to easily contact the right person or department
+within an organization to report vulnerabilities they've found in the website or IT systems.
+
+Example: https://www.google.com/.well-known/security.txt
+
+contact: bugbounty.organization.com
+report: https://organaization.com/support/report
+getflag: http://<currenthost>/challenges/level1/downloadhintfile.html
+HOF: https://organization/halloffame
+codeword: sivajivayileyjilebi
+getsecondflag: http://<currenthost>/challenges/level1/secondhint.html

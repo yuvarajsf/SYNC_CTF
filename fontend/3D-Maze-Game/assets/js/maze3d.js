@@ -27,6 +27,7 @@ var Demonixis = Demonixis || {};
 
         input = new Demonixis.Input();
         levelHelper = new Demonixis.GameHelper.LevelHelper();
+        levelHelper.current = Number.parseInt(getCookieFromName('level')) || 1;
         cameraHelper = new Demonixis.GameHelper.CameraHelper(camera);
 
         window.addEventListener("resize", function() {
@@ -70,6 +71,8 @@ var Demonixis = Demonixis || {};
         var floorGeometry = new THREE.BoxGeometry(platformWidth, 5, platformHeight);
         var ground = new THREE.Mesh(floorGeometry, new THREE.MeshPhongMaterial({
             map: loader.load("assets/images/textures/ground_diffuse.jpg"),
+            emissive: new THREE.Color(0x666666), 
+            emissiveIntensity: 1.0
         }));
 
         repeatTexture(ground.material.map, 2);
@@ -99,16 +102,15 @@ var Demonixis = Demonixis || {};
         };
 
         var wallTextureArray = [
-            "assets/images/textures/wall2_diffuse.jpg",
-            "assets/images/textures/wall3_diffuse.jpg",
-            "assets/images/textures/wall4_diffuse.jpg",
-            "assets/images/textures/wall5_diffuse.jpg"
+            "assets/images/textures/report.jpg",
+            "assets/images/textures/sign.jpg",
+            "assets/images/textures/desk.jpg",
+            "assets/images/textures/site.jpg"
         ];
-        const defaultWallColor = 0x8b8b8b;
         var wallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
         var wallMaterial = new THREE.MeshLambertMaterial({
-            color: defaultWallColor,
-            map: loader.load(wallTextureArray[Math.floor(Math.random() * wallTextureArray.length)]),
+            map: loader.load(wallTextureArray[levelHelper.current - 1])
+            // map: loader.load("assets/images/textures/wall_diffuse.jpg")
         });
 
         repeatTexture(wallMaterial.map, 2);
@@ -287,7 +289,10 @@ var Demonixis = Demonixis || {};
                 window.location.href = "status.html";
                 return;
             }
-            loadLevel(levelHelper.getNext());
+
+            document.cookie = "level=" + levelValue;
+            showLevelInBottomCenter();
+            loadLevel(levelValue);
             running = true;
             new Demonixis.showHideMessage();
         }
@@ -295,8 +300,6 @@ var Demonixis = Demonixis || {};
 
     // Level loading
     function loadLevel(level) {
-
-        //TODO: Need to implement level integrity check.
         var ajax = new XMLHttpRequest();
         ajax.open("GET", "assets/maps/maze3d-" + level + ".json", true);
         ajax.onreadystatechange = function() {
@@ -330,8 +333,8 @@ var Demonixis = Demonixis || {};
     }
 
     Demonixis.initialize = function initialize(level) {
-    // window.onload = function() {
         initializeEngine();
+        showLevelInBottomCenter();
         if (level > 0 || level <= levelHelper.count) {
             levelHelper.current = level;
             levelHelper.next = level + 1;
@@ -341,5 +344,30 @@ var Demonixis = Demonixis || {};
             levelHelper.next = 2;
             loadLevel(1);
         }
+    }
+
+    function showLevelInBottomCenter() {
+        var levelContainer = document.createElement("div");
+        levelContainer.innerHTML = "Level " + levelHelper.current;
+        levelContainer.style.position = "absolute";
+        levelContainer.style.backgroundColor = "#666";
+        levelContainer.style.bottom = "10px";
+        levelContainer.style.left = "50%";
+        levelContainer.style.color = "#fff";
+        levelContainer.style.fontSize = "24px";
+        levelContainer.style.transform = "translateX(-50%)";
+        document.body.appendChild(levelContainer);
+    }
+
+    
+    function getCookieFromName(name) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].split('=');
+            if (cookie[0].trim() === name) {
+                return cookie[1];
+            }
+        }
+        return null;
     }
 })();

@@ -12,7 +12,7 @@ public class CtfHelper
     public CtfHelper(Guid userId)
     {
         this.userId = userId;
-        this.userData = new UserHelper().GetUserStatusById(userId, false);
+        this.userData = new UserHelper().GetUserById(userId, false);
         this.currentPath = Directory.GetCurrentDirectory();
     }
 

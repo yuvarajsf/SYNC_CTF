@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <script>
+        // Download hint file
+        const downloadHintFile = () => {
+            const backendUrl = "https://localhost:7138";
+            var userId = document.cookie.split(";")[0].split("=")[1];
+            if (userId === "" || userId === undefined) {
+                alert("Please register to download the hint file");
+                return;
+            }
+
+            var flagLink = backendUrl + "/lvl1/flag?userId=" + userId + "&codeword=<codeword here>";
+
+            const hintFile = new Blob(['FlagLink: '+ flagLink], { type: 'text/plain' });
+            const url = URL.createObjectURL(hintFile);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hint.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+
+        downloadHintFile();
+    </script>
+</body>
+</html>
