@@ -12,4 +12,12 @@ public class lvlController : Microsoft.AspNetCore.Mvc.Controller
         string userFlag = new lvlHelper(userId).Getl1UserFlag(codeword);
         return userFlag;
     }
+
+    [HttpGet]
+    [Route("/lvl2/flag")]
+    public string GetLvl2Flg(string userId, string codeword)
+    {
+        string userFlag = new lvlHelper(userId).Getl2UserFlag(codeword);
+        return userFlag;
+    }
 }

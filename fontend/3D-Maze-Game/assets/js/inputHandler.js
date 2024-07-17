@@ -225,5 +225,5 @@ var Demonixis = Demonixis || {};
 
     document.getElementById('start').addEventListener('click', async function (event) {
         await formHandler(event);
-    });
+    });    
 })();

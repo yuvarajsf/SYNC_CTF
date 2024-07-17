@@ -1,11 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level - 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .article {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border: #ccc 1px solid;
+        }
+
+        .article h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .article p {
+            color: #666;
+        }
+    </style>
+    <script>
+        var Demonixis = Demonixis || {};
+
+        let RootURL = "https://localhost:7138";
+
+        function generateHint(password) {
+            const spans = document.querySelectorAll('span');
+            spans.forEach(span => {
+                if (span.style.display === 'none') {
+                    if (span.textContent.split(":")[1] === password) {
+                        var hint = [23, 5, 12, 3, 15, 13, 5, 20, 15, 13, 7, 19, 17, 21, 1, 4];
+                        var hintString = '';
+                        hint.forEach(num => {
+                            hintString += String.fromCharCode(num + 64);
+                        });
+                        console.log("codeword: " + hintString);
+                        updateHint(hintString);
+                    }
+                }
+            });
+        }
+
+        Demonixis.validateHint = function (password) {
+            // write any random js code here to confuse the user
+            const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            let randomString = '';
+            for (let i = 0; i < 10; i++) {
+                const randomIndex = Math.floor(Math.random() * alphabets.length);
+                randomString += alphabets[randomIndex];
+            }
+            return randomString;
+        }
+
+        async function updateHint(hint) {
+            new Demonixis.validateHint(hint);
+            var userId = getCookieFromName('userid');
+            if (hint)
+                var data = {
+                    hint: hint,
+                    userId: userId
+                };
+            try {
+                var response = await fetch(RootURL + '/user/update-hint', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                var result = await response.text();
+                if (result) {
+                    alert("Flag URL = " + result);
+                } else {
+                    alert('Failed to update hint');
+                }
+            } catch (error) {
+                console.error('Error updating hint:', error);
+                alert('An error occurred while updating the hint');
+            }
+        }
+
+        function getCookieFromName(name) {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].split('=');
+                if (cookie[0].trim() === name) {
+                    return cookie[1];
+                }
+            }
+            return null;
+        }
+
+    </script>
 </head>
+
 <body>
-    
+    <header>
+        <div class="container">
+            <h1>
+                <p>Hot News</p> Developers Perspective Is Waste
+            </h1>
+        </div>
+    </header>
+    <div class="container">
+        <div class="article">
+            <h2>Breaking News: JavaScript Framework X Released</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan urna. Donec bibendum
+                purus ut purus lacinia, at egestas lacus commodo. Vivamus non tempor est, et feugiat tortor.</p>
+        </div>
+        <div class="article">
+            <h2>Opinion: Why TypeScript is a Game Changer</h2>
+            <p>Phasellus eget felis vitae purus faucibus luctus. Integer malesuada, nulla at facilisis feugiat, neque
+                sapien feugiat lacus, id bibendum massa risus ac sem. Donec ac arcu id ipsum sodales sollicitudin.</p>
+        </div>
+        <div class="article">
+            <h2>Tutorial: Building a Simple Web App with React</h2>
+            <p>Maecenas consectetur lacus ut neque tempor, non commodo augue vestibulum. Ut et magna ut augue tempor
+                suscipit at ac odio. Nulla facilisi. Curabitur nec purus sit amet velit vehicula convallis.</p>
+        </div>
+        <div class="article">
+            <h2>Feature: Top 10 VS Code Extensions for Developers</h2>
+            <p>Sed sed urna eget nunc sollicitudin aliquet. Suspendisse potenti. Aliquam erat volutpat. Curabitur
+                vehicula, magna non <span style="display: none;">password:sourcereview</span> tincidunt elementum, ex magna fermentum purus, a varius nunc elit in mauris.</p>
+        </div>
+        <div class="article">
+            <h2>Update: New Features in Python 3.10</h2>
+            <p>Nam tempor nulla sit amet ante pretium, vel malesuada turpis luctus. Integer vitae magna a velit
+                malesuada vehicula ut at turpis. Aenean euismod orci eu felis aliquam, sed fringilla urna convallis.</p>
+        </div>
+        <div class="article">
+            <h2>Case Study: Migrating to a Microservices Architecture</h2>
+            <p>Ut nec sem sit amet dolor dapibus interdum. Proin malesuada purus eget ex tincidunt, non pulvinar magna
+                varius. Fusce at vestibulum erat. Duis aliquet, mi nec sollicitudin luctus, nisi nulla interdum justo.
+            </p>
+        </div>
+    </div>
 </body>
+
 </html>

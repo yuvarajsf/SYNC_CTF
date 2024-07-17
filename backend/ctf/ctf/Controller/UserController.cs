@@ -27,4 +27,12 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
 
         return userInfo;
     }
+
+    [HttpPost]
+    [Route("update-hint")]
+    public string UpdateUserHint([FromBody] HintModel hintData)
+    {
+        var response = new UserHelper().UpdateUserHintWithUseId(hintData);
+        return response;
+    }
 }
