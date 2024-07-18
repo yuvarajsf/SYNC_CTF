@@ -289,12 +289,23 @@ var Demonixis = Demonixis || {};
                 window.location.href = "status.html";
                 return;
             }
-
-            document.cookie = "level=" + levelValue;
-            showLevelInBottomCenter();
-            loadLevel(levelValue);
-            running = true;
-            new Demonixis.showHideMessage();
+            const RootURL = "https://localhost:7138";
+            var userId = getCookieFromName('userid');
+            fetch(RootURL + '/user/get-user-info/' + userId).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            }).then(data => {
+                levelValue = data.challenge.currentLevel;
+                levelHelper.current = levelValue;
+                document.cookie = "level=" + levelValue;
+                showLevelInBottomCenter();
+                loadLevel(levelValue);
+                running = true;
+                new Demonixis.showHideMessage();
+            });
+            
         }
     }
 

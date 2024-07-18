@@ -4,8 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level - 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #3b5998;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        .container {
+            width: 40%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-center {
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .content-text {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .comment-box {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .comment-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3b5998;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .comment-button:hover {
+            background-color: #334d84;
+        }
+        .comments {
+            margin-top: 20px;
+        }
+        .comment {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .comment:last-child {
+            border-bottom: none;
+        }
+    </style>
 </head>
 <body>
-    
+    <header>
+        Syncfusion CTF Challenge
+    </header>
+    <div class="container">
+        <h3 id="hint-area">Welcome user there is no hint!</h3>
+        <img src="../../assets/images/ctf.jpeg" width="600px" height="400px" alt="Placeholder Image" class="image-center">
+        <div class="content-text">
+            <b>Admin:</b> I am egar to know your thoughts on this image. Please leave a comment below.
+        </div>
+        <div>
+            <textarea id="cmt" class="comment-box" placeholder="Write a comment..."></textarea>
+            <button id="cmt-btn" class="comment-button">Comment</button>
+        </div>
+        <div id="comments" class="comments">
+        </div>
+    </div>
+    <script src="./index.js"></script>
 </body>
 </html>

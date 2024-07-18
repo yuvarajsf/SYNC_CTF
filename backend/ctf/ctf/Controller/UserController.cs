@@ -35,4 +35,28 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
         var response = new UserHelper().UpdateUserHintWithUseId(hintData);
         return response;
     }
+
+    [HttpGet]
+    [Route("get-comments/{userid}")]
+    public List<CommentModel> GetAllComments(string userid)
+    {
+        var response = new UserHelper().GetAllCommentsFromDB(userid, true, true);
+        return response;
+    }
+    
+    [HttpPost]
+    [Route("add-comment")]
+    public List<CommentModel> AddComment([FromBody] CommentModel userComment)
+    {
+        var response = new UserHelper().UpdateUserComment(userComment);
+        return response;
+    }
+
+    [HttpGet]
+    [Route("validate-role/{role}")]
+    public string ValidateUserRole(string role)
+    {
+        var response = new UserHelper().ValidateUserRole(role);
+        return response;
+    }
 }

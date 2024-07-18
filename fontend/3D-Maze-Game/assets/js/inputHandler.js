@@ -55,7 +55,6 @@ var Demonixis = Demonixis || {};
 
         // get the response from the server
         var responseData = await response.json();
-        debugger;
         if (!response.ok) {
             alert('Error: ' + responseData.message);
             return;

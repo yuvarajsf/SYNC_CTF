@@ -1,5 +1,5 @@
 using ctf.Model;
-using Microsoft.Extensions.Configuration.UserSecrets;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace ctf.Helper;
@@ -141,5 +141,94 @@ public class UserHelper
         string existingHint = File.ReadAllTextAsync(this.currentPath + "/Database/userHints.json").Result;
         List<HintModel> userHints = JsonConvert.DeserializeObject<List<HintModel>>(existingHint);
         return userHints;
+    }
+
+    public string ValidateUserRole(string role)
+    {
+        string hintString = string.Empty;
+        if (role == "Mqrt")
+        {
+            hintString = "Welcome user there is no hint!";
+        } 
+        else if (role == "Sbzkp")
+        {
+            hintString = "Welcome Admin, the codeword is: 'summailladasimma' ----- I don't give you the flag URL remember the past games and find the flag URL and get your flag!";
+        }
+
+        return hintString;
+    }
+    
+    public List<CommentModel> UpdateUserComment(CommentModel userComment)
+    {
+        List<CommentModel> currentComment = new List<CommentModel>();
+        var comments = this.GetAllCommentsFromDB();
+        userComment.userName = this.GetUserById(Guid.Parse(userComment.userId)).userName;
+        comments.Add(userComment);
+        this.WriteCommentsToDB(comments);
+        userComment.userId = string.Empty;
+        currentComment.Add(userComment);
+        currentComment = this.SanitizeUserComments(currentComment);
+        return currentComment;
+    }
+
+    public List<CommentModel> GetAllCommentsFromDB(string userid = null, bool sanitize = false, bool removeUserId = false)
+    {
+        List<CommentModel> userCommentsList = new List<CommentModel>();
+        string userComments = File.ReadAllTextAsync(this.currentPath + "/Database/userComments.json").Result;
+        List<CommentModel> comments = JsonConvert.DeserializeObject<List<CommentModel>>(userComments);
+
+        if (!string.IsNullOrEmpty(userid))
+        {
+            userCommentsList = comments.FindAll(data => data.userId == userid);
+        }
+        else
+        {
+            userCommentsList = comments;
+        }
+        
+        if (sanitize)
+        {
+            userCommentsList = this.SanitizeUserComments(userCommentsList);
+        }
+
+        if (removeUserId)
+        {
+            foreach (var data in userCommentsList)
+            {
+                data.userId = string.Empty;
+            }
+        }
+        
+        return userCommentsList;
+    }
+
+    private List<CommentModel> SanitizeUserComments(List<CommentModel> userComments)
+    {
+        List<string> blockedStrings = ["script", "alert", "(", ")", "print", "<>", "><", "<!--", "-->", "prompt"];
+        foreach (var comment in userComments)
+        {
+            bool containsBlocklistedWord;
+            do
+            {
+                containsBlocklistedWord = false;
+                foreach (var word in blockedStrings)
+                {
+                    var sanitizedComment = Regex.Replace(comment.comment, Regex.Escape(word), "", RegexOptions.IgnoreCase);
+                    if (sanitizedComment != comment.comment)
+                    {
+                        containsBlocklistedWord = true;
+                        comment.comment = sanitizedComment;
+                    }
+                }
+            } while (containsBlocklistedWord);
+        }
+
+        return userComments;
+    }
+    
+    private void WriteCommentsToDB(List<CommentModel> userComment)
+    {
+        string userComments = JsonConvert.SerializeObject(userComment);
+        File.WriteAllTextAsync(this.currentPath + "/Database/userComments.json", userComments);
     }
 }
