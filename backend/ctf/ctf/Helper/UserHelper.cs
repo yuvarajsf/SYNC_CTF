@@ -180,8 +180,18 @@ public class UserHelper
         if (!string.IsNullOrEmpty(userid))
         {
             userCommentsList = comments.FindAll(data => data.userId == userid);
+            var currentUserTeam = this.GetUserById(Guid.Parse(userid)).team;
+            if (currentUserTeam == "Admin")
+            {
+                userCommentsList = comments;
+                sanitize = false;
+            }
         }
-        else
+        else if (string.IsNullOrEmpty(userid) && sanitize)
+        {
+            // do nothing
+        }
+        else 
         {
             userCommentsList = comments;
         }

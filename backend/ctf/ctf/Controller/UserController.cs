@@ -40,6 +40,7 @@ public class UserController : Microsoft.AspNetCore.Mvc.Controller
     [Route("get-comments/{userid}")]
     public List<CommentModel> GetAllComments(string userid)
     {
+        userid = userid == "null" ? null : userid;
         var response = new UserHelper().GetAllCommentsFromDB(userid, true, true);
         return response;
     }
