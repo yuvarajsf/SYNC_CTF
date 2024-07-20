@@ -40,7 +40,12 @@ public class CtfHelper
                 }
                 
                 // update current level into next level
-                currentUserData.challenge.currentLevel = JsonConvert.DeserializeObject<UserLevel>((Int16.Parse(JsonConvert.SerializeObject(ctfData.currentLevel)) + 1).ToString());
+                int userLevel = Int16.Parse(JsonConvert.SerializeObject(ctfData.currentLevel)) + 1;
+                if (userLevel > 5)
+                {
+                    userLevel = 5;
+                }
+                currentUserData.challenge.currentLevel = JsonConvert.DeserializeObject<UserLevel>((userLevel).ToString());
                 
                 // update into original data
                 this.UpdateUserGameStatus(userDatas);

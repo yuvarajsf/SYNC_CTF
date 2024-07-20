@@ -14,9 +14,7 @@ public class lvlHelper
     {
         if (codeword.ToLower() == "sivajivayileyjilebi")
         {
-            UserLevel currentLevel = this.userInfo.challenge.currentLevel;
-            string currentFlag = this.GetUserFlagBasedOnLevel(currentLevel);
-            return currentFlag;
+            return this.GetFlagString();
         }
 
         return "Code word mismatch or missing";
@@ -41,14 +39,29 @@ public class lvlHelper
     {
         if (codeword.ToLower() == "summailladasimma")
         {
-            UserLevel currentLevel = this.userInfo.challenge.currentLevel;
-            string currentFlag = this.GetUserFlagBasedOnLevel(currentLevel);
-            return currentFlag;
+            return this.GetFlagString();
         }
         
         return "Code word mismatch or missing";
     }
-    
+
+    public string Getl4UserFlag(string codeword)
+    {
+        if (codeword.ToLower() == "metamamamarkzuck")
+        {
+            return this.GetFlagString();
+        }
+
+        return "Code word mismatch or missing";
+    }
+
+
+    private string GetFlagString()
+    {
+        UserLevel currentLevel = this.userInfo.challenge.currentLevel;
+        string currentFlag = this.GetUserFlagBasedOnLevel(currentLevel);
+        return currentFlag;
+    }
     
     private string GetUserFlagBasedOnLevel(UserLevel currentLevel)
     {

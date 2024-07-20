@@ -45,14 +45,14 @@ public class FlagModel
         // need to add four and five
         FlagOrder fourthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{I_F0u4d_St3gn0_K1ng_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level4
         };
         reprotFlags.Add(fourthFlag);
         
         FlagOrder fifthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{Y0u_4r3_Cript0nigh7_F3ar_of_Sup3r_H3r0_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level5
         };
         reprotFlags.Add(fifthFlag);
@@ -89,14 +89,14 @@ public class FlagModel
         // need to add four and five
         FlagOrder fourthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{I_F0u4d_St3gn0_K1ng_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level4
         };
         signFlags.Add(fourthFlag);
         
         FlagOrder fifthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{Y0u_4r3_Cript0nigh7_F3ar_of_Sup3r_H3r0_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level5
         };
         signFlags.Add(fifthFlag);
@@ -133,14 +133,14 @@ public class FlagModel
         // need to add four and five
         FlagOrder fourthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{I_F0u4d_St3gn0_K1ng_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level4
         };
         deskFlags.Add(fourthFlag);
         
         FlagOrder fifthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{Y0u_4r3_Cript0nigh7_F3ar_of_Sup3r_H3r0_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level5
         };
         deskFlags.Add(fifthFlag);
@@ -177,14 +177,14 @@ public class FlagModel
         // need to add four and five
         FlagOrder fourthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{I_F0u4d_St3gn0_K1ng_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level4
         };
         siteFlags.Add(fourthFlag);
         
         FlagOrder fifthFlag = new FlagOrder()
         {
-            flag = string.Empty,
+            flag = "SYNC_CTF{Y0u_4r3_Cript0nigh7_F3ar_of_Sup3r_H3r0_" + this.GetRandomId() + "}",
             levelFlag = UserLevel.Level5
         };
         siteFlags.Add(fifthFlag);

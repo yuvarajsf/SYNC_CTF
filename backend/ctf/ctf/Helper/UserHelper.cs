@@ -184,7 +184,6 @@ public class UserHelper
             if (currentUserTeam == "Admin")
             {
                 userCommentsList = comments;
-                sanitize = false;
             }
         }
         else if (string.IsNullOrEmpty(userid) && sanitize)

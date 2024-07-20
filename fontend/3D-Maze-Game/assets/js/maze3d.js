@@ -105,6 +105,7 @@ var Demonixis = Demonixis || {};
             "assets/images/textures/report.jpg",
             "assets/images/textures/sign.jpg",
             "assets/images/textures/desk.jpg",
+            "assets/images/textures/boldbi.jpg",
             "assets/images/textures/site.jpg"
         ];
         var wallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);

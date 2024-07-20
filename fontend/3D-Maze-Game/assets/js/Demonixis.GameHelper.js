@@ -4,7 +4,7 @@ Demonixis.GameHelper = Demonixis.GameHelper || {};
 Demonixis.GameHelper.LevelHelper = function(start, end) {
     this.current = start || 1;
     this.next = this.current + 1;
-    this.count = 3;
+    this.count = 5;
     this.isFinished = false;
 
     this.getNext = function() {
