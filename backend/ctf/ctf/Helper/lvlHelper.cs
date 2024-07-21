@@ -56,6 +56,16 @@ public class lvlHelper
     }
 
 
+    public string Getl5UserFlag(string codeword)
+    {
+        if (codeword.ToLower() == "maapuvachitandaappu")
+        {
+            return this.GetFlagString();
+        }
+
+        return "Code word mismatch or missing";
+    }
+    
     private string GetFlagString()
     {
         UserLevel currentLevel = this.userInfo.challenge.currentLevel;

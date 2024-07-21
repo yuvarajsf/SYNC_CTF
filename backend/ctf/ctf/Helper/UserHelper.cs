@@ -179,11 +179,14 @@ public class UserHelper
 
         if (!string.IsNullOrEmpty(userid))
         {
-            userCommentsList = comments.FindAll(data => data.userId == userid);
             var currentUserTeam = this.GetUserById(Guid.Parse(userid)).team;
             if (currentUserTeam == "Admin")
             {
                 userCommentsList = comments;
+            }
+            else
+            {
+                userCommentsList = comments.FindAll(data => data.userId == userid);
             }
         }
         else if (string.IsNullOrEmpty(userid) && sanitize)

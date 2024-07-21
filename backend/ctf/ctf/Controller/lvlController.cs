@@ -1,4 +1,5 @@
 using ctf.Helper;
+using ctf.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ctf.Controller;
@@ -9,6 +10,7 @@ public class lvlController : Microsoft.AspNetCore.Mvc.Controller
     [Route("/lvl1/flag")]
     public string GetLvl1Flag(string userId, string codeword)
     {
+        new UserLogHelper().LogUserData(codeword, userId, UserLevel.Level1);
         string userFlag = new lvlHelper(userId).Getl1UserFlag(codeword);
         return userFlag;
     }
@@ -17,6 +19,7 @@ public class lvlController : Microsoft.AspNetCore.Mvc.Controller
     [Route("/lvl2/flag")]
     public string GetLvl2Falg(string userId, string codeword)
     {
+        new UserLogHelper().LogUserData(codeword, userId, UserLevel.Level2);
         string userFlag = new lvlHelper(userId).Getl2UserFlag(codeword);
         return userFlag;
     }
@@ -25,6 +28,7 @@ public class lvlController : Microsoft.AspNetCore.Mvc.Controller
     [Route("/lvl3/flag")]
     public string GetLvl3Flag(string userId, string codeword)
     {
+        new UserLogHelper().LogUserData(codeword, userId, UserLevel.Level3);
         string userFlag = new lvlHelper(userId).Getl3UserFlag(codeword);
         return userFlag;
     }
@@ -33,7 +37,17 @@ public class lvlController : Microsoft.AspNetCore.Mvc.Controller
     [Route(("/lvl4/flag"))]
     public string GetLvl4Flag(string userId, string codeword)
     {
+        new UserLogHelper().LogUserData(codeword, userId, UserLevel.Level4);
         string userFlag = new lvlHelper(userId).Getl4UserFlag(codeword);
+        return userFlag;
+    }
+
+    [HttpGet]
+    [Route("/lvl5/flag")]
+    public string GetLvl5Flag(string userId, string codeword)
+    {
+        new UserLogHelper().LogUserData(codeword, userId, UserLevel.Level5);
+        string userFlag = new lvlHelper(userId).Getl5UserFlag(codeword);
         return userFlag;
     }
 }
