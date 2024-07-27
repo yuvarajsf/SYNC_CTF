@@ -13,5 +13,11 @@ public class CTFStatus
     
     public bool isCompleted { get; set; }
     
+    public bool isEscaped { get; set; }
+    
+    public bool isFlagFound { get; set; }
+    
+    public DateTime flagFoundAt { get; set; }
+    
     public string flag { get; set; }
 }

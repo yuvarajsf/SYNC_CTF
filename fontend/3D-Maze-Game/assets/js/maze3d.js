@@ -8,6 +8,7 @@ var Demonixis = Demonixis || {};
     var input, miniMap, levelHelper, CameraHelper;
     var map = new Array();
     var running = true;
+    const RootURL = "https://localhost:7138";
 
     function initializeEngine() {
         renderer = new THREE.WebGLRenderer({
@@ -274,7 +275,8 @@ var Demonixis = Demonixis || {};
         }
     }
 
-    function endScreen() {
+    async function endScreen() {
+        var userId = getCookieFromName('userid');
         if (levelHelper.isFinished || levelHelper.isMobile) {
             alert("Good job, The game is over\n\nThanks you for playing!");
         } else {
@@ -286,18 +288,33 @@ var Demonixis = Demonixis || {};
             scene = new THREE.Scene();
             levelValue = levelHelper.getNext();
             if (levelHelper.isFinished) {
+                var response = await fetch(RootURL + '/flag/validate-escape/' + userId);
+                try {
+                    var responseData = await response.text();
+                    console.log(responseData);
+                } catch (error) {
+                    console.error(error);
+                }
                 alert("Good job, The game is over\n\nThanks you for playing!");
                 window.location.href = "status.html";
                 return;
             }
-            const RootURL = "https://localhost:7138";
-            var userId = getCookieFromName('userid');
+            
+            var response = await fetch(RootURL + '/flag/validate-escape/' + userId);
+            try {
+                var responseData = await response.text();
+                console.log(responseData);
+            } catch (error) {
+                console.error(error);
+            }
+
             fetch(RootURL + '/user/get-user-info/' + userId).then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
                 }
                 return response.json();
             }).then(data => {
+                debugger;
                 levelValue = data.challenge.currentLevel;
                 levelHelper.current = levelValue;
                 document.cookie = "level=" + levelValue;
@@ -306,7 +323,6 @@ var Demonixis = Demonixis || {};
                 running = true;
                 new Demonixis.showHideMessage();
             });
-            
         }
     }
 

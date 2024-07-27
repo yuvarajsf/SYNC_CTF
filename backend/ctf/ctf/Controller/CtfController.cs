@@ -13,4 +13,12 @@ public class CtfController : Microsoft.AspNetCore.Mvc.Controller
       var status = new CtfHelper(Guid.Parse(userId)).ValidateUserFlag(flag);
       return status;
    }
+
+   [HttpGet]
+   [Route("validate-escape/{userId}")]
+   public bool ValidateUserEscapeStatus(string userId)
+   {
+      var status = new CtfHelper(Guid.Parse(userId)).UpdateUserEscapeStatus();
+      return status;
+   }
 }

@@ -106,6 +106,14 @@ var Demonixis = Demonixis || {};
     }
 
     function showCTFChallenge() {
+        var existingMessageContainer = document.getElementById('messageContainer');
+        if (existingMessageContainer) {
+            existingMessageContainer.remove();
+        }
+        var existingFlagBtn = document.getElementById('enable-btn');
+        if (existingFlagBtn) {
+            existingFlagBtn.remove();
+        }
         var messageContainer = document.createElement("div")
         messageContainer.setAttribute("id", "messageContainer");
         messageContainer.style.position = "absolute";
