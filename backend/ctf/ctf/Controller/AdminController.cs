@@ -1,4 +1,5 @@
 using ctf.Helper;
+using ctf.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ctf.Controller;
@@ -12,6 +13,11 @@ public class AdminController : Microsoft.AspNetCore.Mvc.Controller
     {
         return new AdminHelper().CheckPermission(userName);
     }
-    
-    
+
+    [HttpGet]
+    [Route("get-all-player-status")]
+    public List<CurrentLevelInfo> GetAllUsersInfo()
+    {
+        return new AdminHelper().GetAllUserLevelInfo();
+    }
 }

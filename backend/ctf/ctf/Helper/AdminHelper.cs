@@ -9,6 +9,7 @@ public class AdminHelper
     private List<UserModel> usersData;
     private List<HintModel> userHints;
     private List<CommentModel> userComments;
+
     public AdminHelper()
     {
         this._userHelper = new UserHelper();
@@ -43,5 +44,29 @@ public class AdminHelper
         }
 
         return string.Empty;
+    }
+
+
+    public List<CurrentLevelInfo> GetAllUserLevelInfo()
+    {
+        List<CurrentLevelInfo> usersLevelInfo = new List<CurrentLevelInfo>();
+        for (var i=0; i < this.usersData.Count; i++)
+        {
+            if (this.usersData[i].team != "admin")
+            {
+                CurrentLevelInfo userInfo = new CurrentLevelInfo()
+                {
+                    userName = this.usersData[i].userName,
+                    team = this.usersData[i].team,
+                    currentLevel = this.usersData[i].challenge.currentLevel,
+                    isFlagFound = this.usersData[i].challenge.challengeStatus.Find(data => data.level == this.usersData[i].challenge.currentLevel).isFlagFound,
+                    isEscaped = this.usersData[i].challenge.challengeStatus.Find(data => data.level == this.usersData[i].challenge.currentLevel).isEscaped
+                };
+
+                usersLevelInfo.Add(userInfo);
+            }
+        }
+
+        return usersLevelInfo;
     }
 }
