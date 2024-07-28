@@ -20,4 +20,25 @@ public class AdminController : Microsoft.AspNetCore.Mvc.Controller
     {
         return new AdminHelper().GetAllUserLevelInfo();
     }
+
+    [HttpGet]
+    [Route("get-all-player-stage-wise-status")]
+    public List<UsedHints> GetAllUserHints()
+    {
+        return new AdminHelper().GetAllUsersHintLevelWise();
+    }
+
+    [HttpGet]
+    [Route("get-all-comments")]
+    public List<UserCommentsModel> GetAllComments()
+    {
+        return new AdminHelper().GetAllComments();
+    }
+
+    [HttpGet]
+    [Route("get-leaderboard")]
+    public List<LeaderBoard> GetLeaderBoard()
+    {
+        return new AdminHelper().GetLeaderBoardInfo();
+    }
 }

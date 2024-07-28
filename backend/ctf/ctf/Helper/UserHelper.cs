@@ -180,7 +180,7 @@ public class UserHelper
         if (!string.IsNullOrEmpty(userid))
         {
             var currentUserTeam = this.GetUserById(Guid.Parse(userid)).team;
-            if (currentUserTeam == "Admin")
+            if (currentUserTeam == "admin")
             {
                 userCommentsList = comments;
             }

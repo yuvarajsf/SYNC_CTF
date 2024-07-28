@@ -54,9 +54,9 @@ public class UserLogHelper
         }
     }
 
-    private List<UserLogs> GetUserLogsByUserId(string userId)
+    public List<UserLogs> GetAllUserLogs()
     {
-        return new List<UserLogs>();
+        return this.userLogs;
     }
     
     private List<UserLogs> ReadUserLogs()

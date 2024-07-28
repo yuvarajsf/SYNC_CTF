@@ -314,7 +314,6 @@ var Demonixis = Demonixis || {};
                 }
                 return response.json();
             }).then(data => {
-                debugger;
                 levelValue = data.challenge.currentLevel;
                 levelHelper.current = levelValue;
                 document.cookie = "level=" + levelValue;
