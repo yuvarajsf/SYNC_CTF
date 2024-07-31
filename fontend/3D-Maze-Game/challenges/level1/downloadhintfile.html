@@ -9,7 +9,7 @@
     <script>
         // Download hint file
         const downloadHintFile = () => {
-            const backendUrl = "https://localhost:7138";
+            const backendUrl = "http://172.16.204.31:5025";
             var userId = document.cookie.split(";")[0].split("=")[1];
             if (userId === "" || userId === undefined) {
                 alert("Please register to download the hint file");

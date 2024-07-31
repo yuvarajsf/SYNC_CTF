@@ -1,6 +1,6 @@
 (function () {
 
-    const RootURL = "https://localhost:7138";
+    const RootURL = "http://172.16.204.31:5025";
     const cmtBtn = document.getElementById('cmt-btn');
     const cmtInput = document.getElementById('cmt');
 

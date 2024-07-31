@@ -123,14 +123,14 @@ public class UserHelper
         HintModel userData = userHints.Find(data => data.userId == hintData.userId);
         if (userData != null)
         {
-            returnUrl = "You already found a hint. just check where you missed!\n\nhttps://localhost:7138/lvl2/flag?userId="+hintData.userId+"&codeword=<your code word>";
+            returnUrl = "You already found a hint. just check where you missed!\n\nhttp://172.16.204.31:5025/lvl2/flag?userId="+hintData.userId+"&codeword=<your code word>";
         }
         else
         {
             userHints.Add(hintData);
             string serializedHint = JsonConvert.SerializeObject(userHints);
             File.WriteAllTextAsync(this.currentPath + "/Database/userHints.json", serializedHint);
-            returnUrl = "https://localhost:7138/lvl2/flag?userId="+hintData.userId+"&codeword=<your code word>";
+            returnUrl = "http://172.16.204.31:5025/lvl2/flag?userId="+hintData.userId+"&codeword=<your code word>";
         }
 
         return returnUrl;

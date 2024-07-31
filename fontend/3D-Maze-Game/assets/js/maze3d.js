@@ -8,7 +8,7 @@ var Demonixis = Demonixis || {};
     var input, miniMap, levelHelper, CameraHelper;
     var map = new Array();
     var running = true;
-    const RootURL = "https://localhost:7138";
+    const RootURL = "http://172.16.204.31:5025";
 
     function initializeEngine() {
         renderer = new THREE.WebGLRenderer({

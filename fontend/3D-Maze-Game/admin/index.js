@@ -1,5 +1,5 @@
 (function () {
-    let RootURL = "https://localhost:7138";
+    let RootURL = "http://172.16.204.31:5025";
 
     window.onload = async function () {
 
@@ -29,6 +29,9 @@
                 break;
             case "comt1":
                 await loadAllComments();
+                break;
+            case "leader1":
+                await loadLeaderBoard();
                 break;
             default:
                 break;
@@ -180,6 +183,64 @@
         });
 
     }
+
+    async function loadLeaderBoard() {
+        var response = await fetch(RootURL + '/admin/get-leaderboard');
+        var leaderBoardData = await response.json();
+
+        const tablesContainer = document.getElementById('tables-container');
+
+        if (document.getElementById('leaderboard-container')) {
+            tablesContainer.removeChild(document.getElementById('leaderboard-container'));
+        }
+
+
+        const tableContainer = document.createElement('div');
+        tableContainer.id = 'leaderboard-container';
+        tablesContainer.appendChild(tableContainer);
+
+        leaderBoardData.forEach((levelData, index) => {
+            const table = document.createElement('table');
+            const caption = document.createElement('caption');
+            caption.style.fontSize = '20px';
+            caption.style.fontWeight = 'bold';
+            caption.textContent = `Level ${levelData.level}`;
+            table.appendChild(caption);
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const usernameHeader = document.createElement('th');
+            usernameHeader.textContent = 'Username';
+            const foundAtHeader = document.createElement('th');
+            foundAtHeader.textContent = 'FoundAt';
+
+            headerRow.appendChild(usernameHeader);
+            headerRow.appendChild(foundAtHeader);
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            levelData.userData.forEach(user => {
+                const row = document.createElement('tr');
+                const usernameCell = document.createElement('td');
+                usernameCell.textContent = user.userName;
+                const foundAtCell = document.createElement('td');
+                foundAtCell.textContent = user.foundAt === "0001-01-01T00:00:00" ? "Not Found" : user.foundAt;
+
+                row.appendChild(usernameCell);
+                row.appendChild(foundAtCell);
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+
+            table.style.marginTop = '20px';
+            table.style.marginBottom = '20px';
+
+            tableContainer.appendChild(table);
+        });
+    }
+
+
 
     function getCookieFromName(name) {
         var cookies = document.cookie.split(';');

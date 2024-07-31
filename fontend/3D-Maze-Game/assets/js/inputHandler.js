@@ -1,7 +1,7 @@
 var Demonixis = Demonixis || {};
 (function () {
 
-    let RootURL = "https://localhost:7138";
+    let RootURL = "http://172.16.204.31:5025";
 
     window.onload = async function () {
         var userId = getCookieFromName('userid');

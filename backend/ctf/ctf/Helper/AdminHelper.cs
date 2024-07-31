@@ -151,6 +151,22 @@ public class AdminHelper
 
     public List<LeaderBoard> GetLeaderBoardInfo()
     {
-        return new List<LeaderBoard>();
+        List<LeaderBoard> leaderBoardData = new List<LeaderBoard>();
+        
+        var result = this.usersData
+            .SelectMany(u => u.challenge.challengeStatus, (u, cs) => new { u.userName, cs.level, cs.flagFoundAt })
+            .GroupBy(x => x.level)
+            .Select(g => new LeaderBoard
+            {
+                level = g.Key,
+                userData = g.Select(x => new UserData
+                {
+                    userName = x.userName,
+                    foundAt = x.flagFoundAt
+                }).ToList()
+            })
+            .ToList();
+
+        return result;
     }
 }

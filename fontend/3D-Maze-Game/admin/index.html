@@ -171,6 +171,12 @@
             </table>
         </div>
 
+        <div id="leader" class="content" style="display: none;">
+            <div id="tables-container">
+                
+            </div>
+        </div>
+
         <div id="stage" class="content" style="display: none;">
             <div class="unique-container">
                 <div id="unique-table-container">
@@ -189,6 +195,7 @@
     <script src="./index.js"></script>
     <script>
         function showTab(tabId) {
+            debugger;
             document.querySelectorAll('.content').forEach(function (content) {
                 content.style.display = 'none';
             });
